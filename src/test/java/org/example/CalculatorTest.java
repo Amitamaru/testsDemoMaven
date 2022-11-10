@@ -1,8 +1,9 @@
 package org.example;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,44 +14,44 @@ class CalculatorTest {
     public void init() {
         calculator = new Calculator();
     }
+
     @AfterEach
     public void destroy() {
         calculator = null;
     }
 
-    @Test
-    void addTest() {
-        int a = 3;
-        int b = 2;
+
+    @ParameterizedTest
+    @CsvSource({"2, 3, 5",
+                "4, 4, 8"})
+    void addTest(int a, int b, int expected) {
+
         int actual = calculator.add(a, b);
-        int expected = 5;
         assertEquals(expected, actual);
     }
 
-    @Test
-    void subTest() {
-        int a = 3;
-        int b = 2;
+    @ParameterizedTest
+    @CsvSource({"3, 2, 1",
+                "6, 1, 5"})
+    void subTest(int a, int b, int expected) {
         int actual = calculator.sub(a, b);
-        int expected = 1;
         assertEquals(expected, actual);
     }
 
-    @Test
-    void mulTest() {
-        int a = 3;
-        int b = 2;
+
+    @ParameterizedTest
+    @CsvSource({"2, 3, 6",
+            "4, 4, 16"})
+    void mulTest(int a, int b, int expected) {
         int actual = calculator.mul(a, b);
-        int expected = 6;
         assertEquals(expected, actual);
     }
 
-    @Test
-    void divTest() {
-        int a = 3;
-        int b = 2;
+    @ParameterizedTest
+    @CsvSource({"3, 3, 1",
+            "4, 4, 1"})
+    void divTest(int a, int b, int expected) {
         int actual = calculator.div(a, b);
-        int expected = 1;
         assertEquals(expected, actual);
     }
 }
